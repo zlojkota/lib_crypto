@@ -1,0 +1,17 @@
+# depslib dependency file v1.0
+1429525017 source:/home/skota/avr/lib_crypt/main.c
+	<stdio.h>
+	<string.h>
+	<unistd.h>
+	<fcntl.h>
+	<errno.h>
+	"termios.h"
+	<time.h>
+
+1429241873 source:/home/skota/avr/lib_crypt/lib_cry.c
+	"lib_cry.h"
+
+1429241829 /home/skota/avr/lib_crypt/lib_cry.h
+
+1429520285 /home/skota/avr/lib_crypt/termios.h
+
