@@ -15,3 +15,19 @@
 
 1429520285 /home/skota/avr/lib_crypt/termios.h
 
+1429539388 source:/home/skota/lib_crypto/lib_crypt/lib_cry.c
+	"lib_cry.h"
+
+1429539388 /home/skota/lib_crypto/lib_crypt/lib_cry.h
+
+1429539388 source:/home/skota/lib_crypto/lib_crypt/main.c
+	<stdio.h>
+	<string.h>
+	<unistd.h>
+	<fcntl.h>
+	<errno.h>
+	"termios.h"
+	<time.h>
+
+1429539388 /home/skota/lib_crypto/lib_crypt/termios.h
+
