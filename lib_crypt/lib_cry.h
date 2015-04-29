@@ -32,4 +32,6 @@ unsigned char pull_incom_decrypt(void);
 void          push_oucom_decrypt(unsigned char sym);
 unsigned char pull_oucom_crypt  (void);
 
+void crypt_processing(void);
+
 #endif // LIB_CRY_H_INCLUDED

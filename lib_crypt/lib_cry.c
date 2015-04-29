@@ -33,3 +33,18 @@ outcom_crypt_buf_head   =0;
 outcom_decrypt_buf_count=0;
 outcom_decrypt_buf_head =0;
 }
+
+void crypt_processing(void){
+if (incom_crypt_buf_count!=incom_crypt_buf_head){
+//decrypting process
+
+
+}
+
+if (outcom_decrypt_buf_count!=outcom_decrypt_buf_head){
+//encrypting process
+
+}
+
+
+}
