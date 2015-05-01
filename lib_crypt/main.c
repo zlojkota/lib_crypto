@@ -10,6 +10,9 @@
 #include <time.h>   // time calls
 #include <stdlib.h>
 
+// unkoment to use wireless communication
+//#define xbee 1
+
 unsigned char private_key[56],public_key[8];
 
 int open_port(char *port)
@@ -47,6 +50,9 @@ int configure_port(int fd)      // configure the port
 
     cfmakeraw(&port_settings);
     tcsetattr(fd, TCSANOW, &port_settings);    // apply the settings to the port
+
+
+#ifdef xbee
     write(fd,"+++",3);
     buf[0]=0;
     for(; nxt==0;)
@@ -81,12 +87,19 @@ int configure_port(int fd)      // configure the port
     printf("ATWR-%X-%X-%X\n",buf[0],buf[1],buf[2]);
     usleep(10000);
     write(fd,"ATCN\r\n",6);
+<<<<<<< HEAD
     usleep(10000);
     read(fd,buf,2);
     printf("ATCN-%X-%X-%X\n",buf[0],buf[1],buf[2]);
     usleep(10000);
     //read(fd,buf,3);
 
+=======
+    read(fd,buf,3);
+    printf("ATCN-%s\n",buf);
+    usleep(5000);
+#endif
+>>>>>>> 0534183a373237c4cf447e367eb96ce5e2c690ce
     return(fd);
 
 }
@@ -95,7 +108,7 @@ int configure_port(int fd)      // configure the port
 int main(void)
 {   srand(time(NULL));
     int fd = open_port("/dev/ttyUSB0"); //master
-    int fd1 = open_port("/dev/ttyACM0");//slave
+    int fd1 = open_port("/dev/ttyUSB1");//slave
     unsigned char str[44]="HuemHujNaLbu4eshiNuABat'kuNeSmeshiDesatochka";
     unsigned char buffer[44],i;
     configure_port(fd);
