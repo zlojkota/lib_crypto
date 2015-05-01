@@ -51,36 +51,42 @@ int configure_port(int fd)      // configure the port
     buf[0]=0;
     for(; nxt==0;)
     {
-        read(fd,buf,3);
-        printf("%u %s\n",tmr,buf);
+        read(fd,buf,1);
+        printf("\n\n---%x-%x-%x---\n\n",buf[0],buf[1],buf[2]);
+        if ((buf[2]==0x4f)&&(buf[1]==0x4b)&&(buf[0]==0x0d)) nxt=1;
         for (i=15; i>0; i--) buf[i]=buf[i-1];
-        if ((buf[1]==0x4f)&&(buf[2]==0x4b)) nxt=1;
     }
-
     write(fd,"ATCH10\r\n",8);
+    usleep(10000);
     read(fd,buf,3);
-    printf("ATCH10-%s\n",buf);
-    usleep(5000);
+    printf("ATCH10-%X-%X-%X\n",buf[0],buf[1],buf[2]);
     write(fd,"ATMYFFFF\r\n",10);
+    usleep(10000);
     read(fd,buf,3);
-    printf("ATMYFFFF-%s\n",buf);
-    usleep(5000);
+    printf("ATMYFFFF-%X-%X-%X\n",buf[0],buf[1],buf[2]);
+    usleep(10000);
     write(fd,"ATDLFFFF\r\n",10);
+    usleep(10000);
     read(fd,buf,3);
-    printf("ATDLFFFF-%s\n",buf);
-    usleep(5000);
+    printf("ATDLFFFF--%X-%X-%X\n",buf[0],buf[1],buf[2]);
+    usleep(10000);
     write(fd,"ATDH0000\r\n",10);
+    usleep(10000);
     read(fd,buf,3);
-    printf("ATDH0000-%s\n",buf);
-    usleep(5000);
+    printf("ATDH0000-%X-%X-%X\n",buf[0],buf[1],buf[2]);
+    usleep(10000);
     write(fd,"ATWR\r\n",6);
+    usleep(50000);
     read(fd,buf,3);
-    printf("ATWR-%s\n",buf);
-    usleep(5000);
+    printf("ATWR-%X-%X-%X\n",buf[0],buf[1],buf[2]);
+    usleep(10000);
     write(fd,"ATCN\r\n",6);
-    read(fd,buf,3);
-    printf("ATCN-%s\n",buf);
-    usleep(5000);
+    usleep(10000);
+    read(fd,buf,2);
+    printf("ATCN-%X-%X-%X\n",buf[0],buf[1],buf[2]);
+    usleep(10000);
+    //read(fd,buf,3);
+
     return(fd);
 
 }
