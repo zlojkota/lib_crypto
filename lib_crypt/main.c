@@ -87,19 +87,11 @@ int configure_port(int fd)      // configure the port
     printf("ATWR-%X-%X-%X\n",buf[0],buf[1],buf[2]);
     usleep(10000);
     write(fd,"ATCN\r\n",6);
-<<<<<<< HEAD
-    usleep(10000);
-    read(fd,buf,2);
-    printf("ATCN-%X-%X-%X\n",buf[0],buf[1],buf[2]);
-    usleep(10000);
-    //read(fd,buf,3);
-
-=======
     read(fd,buf,3);
     printf("ATCN-%s\n",buf);
     usleep(5000);
 #endif
->>>>>>> 0534183a373237c4cf447e367eb96ce5e2c690ce
+
     return(fd);
 
 }
