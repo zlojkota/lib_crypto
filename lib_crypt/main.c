@@ -9,11 +9,11 @@
 #include "termios.h" // POSIX terminal control definitionss
 #include <time.h>   // time calls
 #include <stdlib.h>
-
+#include "lib_cry.h"
 // unkoment to use wireless communication
 //#define xbee 1
 
-unsigned char private_key[56],public_key[8];
+
 
 int open_port(char *port)
 {
@@ -98,34 +98,38 @@ int configure_port(int fd)      // configure the port
 
 
 int main(void)
-{   srand(time(NULL));
+{
+    srand(time(NULL));
     int fd = open_port("/dev/ttyUSB0"); //master
     int fd1 = open_port("/dev/ttyUSB1");//slave
     unsigned char str[44]="HuemHujNaLbu4eshiNuABat'kuNeSmeshiDesatochka";
-    unsigned char buffer[44],i;
+    unsigned char buffer[44]= {0},tmp;
+    unsigned int i;
     configure_port(fd);
     configure_port(fd1);
-    write(fd,"abrygalg",8);
-    read(fd1,buffer,16);
-    printf("%s",buffer);
-printf("Private_Key:\n");
-    for (i=0; i<56; i++)
+    for (i=0; i<=255; i++)
     {
         private_key[i]=rand()%256;
-        printf("%X\n",private_key[i]);
-
     }
-printf("Public_Key:\n");
-
-        for (i=0; i<8; i++)
+    for (i=0; i<4; i++)
     {
         public_key[i]=rand()%256;
-        printf("%X\n",public_key[i]);
-
     }
 
+    crypt_init();
 
+    for (i=0; i<44; i++)
+    {
+        push_outcom_decrypt(str[i]);
+    }
 
+    crypt_processing();
+
+    for (i=0; i<56; i++)
+    {
+        tmp=pull_outcom_crypt();
+        printf("%X-%c\n",tmp,tmp);
+    }
 
 
     close(fd);
